@@ -1,16 +1,9 @@
 <?php
+namespace APP;
 use CURLFile;
 /**
  * This is the curl instances classe, using different functions to achieve HTTP requests
  */
-$username="franck";
-$password="plop";
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-
 class Curl{
 public function __construct(){
 }
@@ -89,7 +82,7 @@ public function curlGet($req){
 			);
 		$method="GET";
 		$this->setopt($ch,$headers,$method,$data,$url,$username,$password);
-		echo $this->curlExecute($ch);
+
 		return $this->curlExecute($ch);	
 }
 /**
@@ -181,7 +174,3 @@ public function curlPostFile($req,$data){
 		return $this->curlExecute($ch);
 }
 };
-
-$curl = new Curl();
-$curl->curlGet("/org.acme.sample.UserAsset");
-echo "end";
