@@ -26,13 +26,21 @@ if(!empty($_POST['adduserasset'])){
         </script>";
 }
 
-
+var_dump($_GET);
 if(!empty($_GET['action'])){
    if($_GET['action'] == 'echanger'){
-      echo "formulaire echange a faire";
-   
+       $curl = new Curl();
+       $data=array(
+  "$class"=> "org.acme.sample.Request",
+  "requestId"=> $_GET['requestId'],
+  "asset1"=> $_GET['assetId1'],
+  "asset2"=> $_GET['assetId2'],
+  "state"=> "OK");
+
+    echo $curl->curlPost('/org.acme.sample.Request',json_encode($data)); 
    }
 } 
+
 
 
 if(!empty($_POST['inscription'])){
@@ -73,6 +81,4 @@ if(!empty($_POST['connexion'])){
           window.open('index.php', '_self');
         </script>";
 }
-
-
 ?>

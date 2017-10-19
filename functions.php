@@ -57,13 +57,17 @@ function DisplayJSONList($json){
    
    echo "</tr>";
    
-   
    //Display the list
    if(count($jsonarray)>1){
       for($i=0;$i<count($jsonarray);$i++){
          echo "<tr>";
-         
-         echo "<td><a href='process.php?action=echanger'>Echanger</a></td>";
+         $assetId1=$jsonarray[$i]['asset1'];
+         $assetId2=$jsonarray[$i]['asset2'];
+         $requestId=$jsonarray[$i]['requestId'];
+
+
+         ///// warning big shit here
+         echo "<td><a href='process.php?action=echanger&requestId=".$requestId."&assetId1=".htmlspecialchars($assetId1)."&assetId2=".$assetId2."'>Echanger</a></td>";
          
          foreach($jsonarray[$i] as $key){
             echo "<td> $key</td>";
