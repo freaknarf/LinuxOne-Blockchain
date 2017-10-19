@@ -1,11 +1,14 @@
 <?php
-namespace APP;
-use CURLFile;
+//use CURLFile;
 /**
  * This is the curl instances classe, using different functions to achieve HTTP requests
  */
+
 class Curl{
+   
+
 public function __construct(){
+   
 }
 /**
  * [curlExecute execute,log and close connection]
@@ -56,9 +59,9 @@ public function setopt($ch,$headers,$method,$data,$url,$username,$password){
 public function connectionJira(){
 	//login
 		global $jirauser,$jirapwd,$url,$username,$password; 
-		$username =  base64_decode($jirauser);
-		$password =  base64_decode($jirapwd);
-		$url = "http://148.100.4.195:3000/api";
+		$username = ' ';// base64_decode($jirauser) ;
+		$password =  ' ';//base64_decode($jirapwd) ;
+		$url = "http://148.100.5.224:3000/api";
 }
 
 // Prepare CURL GET and POST Requests
@@ -73,15 +76,17 @@ public function curlGet($req){
 		global $jirauser,$jirapwd,$url,$username,$password; 
 		$this->connectionJira();
 		$url.=$req;
-		$data;
+		$data='';
 		$ch = curl_init();
 		$headers = array(
 			'Accept: application/json',
 			'Content-Type: application/json'
 			);
 		$method="GET";
-		$this->setopt($ch,$headers,$method,$data,$url);
-		return $this->curlExecute($ch);	
+		$this->setopt($ch,$headers,$method,$data,$url,$username,$password);
+      return  $this->curlExecute($ch);
+      
+		
 }
 /**
  * [curlDelete DELETE HTTP REQUEST]
@@ -140,7 +145,7 @@ public function curlPost($req,$data){
 			'Content-Type: application/json'
 			);
 		$method="POST";
-		$this->setopt($ch,$headers,$method,$data,$url);
+		$this->setopt($ch,$headers,$method,$data,$url,$username,$password);
 		return $this->curlExecute($ch);
 }
 /**
