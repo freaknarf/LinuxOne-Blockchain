@@ -15,7 +15,7 @@ $myItems=json_decode($curl->curlGet("/org.acme.sample.UserAsset"),true);;;
 
 }
 
-function DisplayAllItems($usr){
+function DisplayAllItems(){
 $curl=new Curl(); 
 $myItems=json_decode($curl->curlGet("/org.acme.sample.UserAsset"),true);;;
       echo'<table>';
@@ -32,7 +32,6 @@ $myItems=json_decode($curl->curlGet("/org.acme.sample.UserAsset"),true);;;
 }
 
 
-
 function DisplayJSONList($json){
 
    $jsonarray = json_decode($json, true); 
@@ -47,8 +46,8 @@ function DisplayJSONList($json){
    //echo $jsonarray;
       if(count($jsonarray)>1){
       //echo $jsonarray[0];
-      $arraykey =  array_keys($jsonarray[0]);
-    }else{
+         $arraykey =  array_keys($jsonarray[0]);
+      }else{
       $arraykey =  array_keys($jsonarray);
     }
     for($i=0;$i<count($arraykey);$i++){
@@ -85,8 +84,5 @@ function DisplayJSONList($json){
    
    echo "</table>";
 }
-//[{"$class":"org.acme.sample.UserAsset","owner":"resource:org.acme.sample.SampleParticipant#participantId:8581","assetId":"assetId:1234","value":"3","description":"banane"},{"$class":"org.acme.sample.UserAsset","owner":"resource:org.acme.sample.SampleParticipant#participantId:8581","assetId":"assetId:2342","value":"3","description":"banane"}]
-
-
 
 ?>
