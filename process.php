@@ -1,11 +1,7 @@
-
 <?php
-
-session_start();
+session_start(); 
 include "Curl.php";
 include "functions.php";
-
-
 if(!empty($_POST['adduserasset'])){
    $value = $_POST['value'];
    $description = $_POST['description'];
@@ -25,24 +21,21 @@ if(!empty($_POST['adduserasset'])){
           window.open('index.php', '_self');
         </script>";
 }
-
-var_dump($_GET);
-if(!empty($_GET['action'])){
-   if($_GET['action'] == 'echanger'){
+   var_dump($_POST);
+if(!empty($_POST['action'])){
+   if($_POST['action'] == 'echanger'){
+    $id = $_POST['requestId'];
        $curl = new Curl();
-       $data=array(
-  "$class"=> "org.acme.sample.Request",
-  "requestId"=> $_GET['requestId'],
-  "asset1"=> $_GET['assetId1'],
-  "asset2"=> $_GET['assetId2'],
-  "state"=> "OK");
-
-    echo $curl->curlPost('/org.acme.sample.Request',json_encode($data)); 
+       $data='{
+  "$class": "org.acme.sample.SubmitRequest",
+  "request": "resource:org.acme.sample.Request#'.$id.'",
+  "newstate": "OK"}';
+  /*echo $data;*/
+ 
+    $curl->curlPost('/org.acme.sample.SubmitRequest',$data);
    }
-} 
-
-
-
+}
+    
 if(!empty($_POST['inscription'])){
    $id = $_POST['participantId'];
    $password = $_POST['password'];
@@ -63,7 +56,6 @@ if(!empty($_POST['inscription'])){
           window.open('index.php', '_self');
         </script>";
 } 
-
 if(!empty($_POST['connexion'])){
    $id = $_POST['participantId'];
    $password = $_POST['password'];
@@ -76,7 +68,21 @@ if(!empty($_POST['connexion'])){
    //$curl = new Curl();
   // $connect = $curl->curlGet('/org.acme.sample.SampleParticipant',$data);
    $_SESSION['participantId'] = $id; 
-
+   echo "<script>
+          window.open('index.php', '_self');
+        </script>";
+}
+if(!empty($_POST['submitRequest'])){
+   $curl=new Curl(); 
+   $request_id = rand(0,9999);
+   $data = '{
+        "$class": "org.acme.sample.Request",
+        "requestId": "requestId:'.$request_id.'",
+        "asset1": "resource:org.acme.sample.UserAsset#assetId:'.$_POST['asset1'].'",
+        "asset2": "resource:org.acme.sample.UserAsset#assetId:'.$_POST['yourAsset'].'",
+        "state": "Demandé"
+      } ';
+   $curl->curlPost("/org.acme.sample.Request", $data);
    echo "<script>
           window.open('index.php', '_self');
         </script>";

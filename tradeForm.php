@@ -1,10 +1,7 @@
 <?php
-
 session_start();
-
 include "Curl.php";
 include "functions.php";
-
 echo "
 <html>
 	<head>
@@ -15,12 +12,8 @@ echo "
 	</head>
 	<body>
 ";
-
 include "header.php";
-
-
 echo "<div id='window' class='row'>";
-
 //form add an user asset
 echo"
 	<div class='col-12 panel'><label> Faire une demande de troc</label>
@@ -30,28 +23,19 @@ echo"
 			<select name='yourAsset'>";
    $curl=new Curl();  
    $myItems=json_decode($curl->curlGet("/org.acme.sample.UserAsset"),true);
-
    var_dump($myItems);
-      foreach ($myItems as $key => $value) {
-
-     if($value['owner']=="resource:org.acme.sample.SampleParticipant#".$_SESSION['participantId']){
+     foreach ($myItems as $key => $value) {
+     if($value['owner']=="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
          $description=$value["description"];
-         echo "<option >$description</option>";
+         $assetid=$value["assetId"];
+         echo "<option value='".$assetid."'>$description</option>";
       }
 }
 			echo"</select>
 		
-
          <input type='submit' name='submitRequest' value='Demander'/>
 		</form>
 	</div>
 ";
-
-
-
-
-
 echo "</div>";
-
-
 ?>

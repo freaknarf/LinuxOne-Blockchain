@@ -6,9 +6,11 @@ function DisplayMyItems(){
    echo'<table>';
 
    foreach ($myItems as $key => $value) {
-      if($value['owner']=="resource:org.acme.sample.SampleParticipant#".$_SESSION['participantId']){
+      if($value['owner']=="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
          $description=$value["description"];
-         echo "<tr><td value=$description>$description</td></tr>";
+         echo "<tr><td value=$description>$description</td>";
+                  $value=$value["value"];
+         echo "<td value=$value>$value</td></tr>";
       }
    }
    echo'</table>';
@@ -22,17 +24,97 @@ function DisplayAllItems(){
 
 
    foreach ($myItems as $key => $value) {
-      if($value['owner']!="resource:org.acme.sample.SampleParticipant#".$_SESSION['participantId']){
+      if($value['owner']!="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
          $description=$value["description"];
-        $assetId=$value["assetId"];
-         echo "<tr><td value=$description>$description</td><td><a href='tradeForm.php?assetId=$assetId'> Echanger</td></tr>";
+         $assetId=$value["assetId"];
+         echo "<tr><td class='item' value=$description>$description</td><td><a class='btn btn-info' role='button' href='tradeForm.php?assetId=$assetId'> Echanger</td></tr>";
       }
    }
 
    echo'</table>';
 }
 
+function DisplayTrades(){
+   $curl=new Curl(); 
+   $myTrades=json_decode($curl->curlGet("/org.acme.sample.Request"),true);;;
 
+   echo'<table>';
+
+
+   foreach ($myTrades as $key => $value) {
+//      if($value['owner']!="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId'])
+      {
+
+
+
+         echo "<table class='trade'>";
+
+         $id=$value['requestId'];
+         if (isset($id))
+            echo "<td>$id</td>";
+
+///DISPLAY ASSET 1 DESCRIPTION
+         $asset1=$value['asset1'];
+         if (isset($asset1)){
+            echo "<td>$asset1</td>";
+            $assetId1= explode("assetId:", $asset1);
+            $assetId1="assetId:".$assetId1[count($assetId1)-1];
+            if (isset($assetId1)){
+                $myItem=json_decode($curl->curlGet("/org.acme.sample.UserAsset"."/$assetId1"),true);
+            
+            }
+            if (isset($myItem['description']))
+               echo $myItem['description'].' - ';
+         }
+///DISPLAY ASSET 2 DESCRIPTION
+         $asset2=$value['asset2'];
+          if (isset($asset2))   {
+            echo "<td>$asset2</td>";
+
+         $assetId2= explode("assetId:", $asset2);
+         $assetId2="assetId:".$assetId2[count($assetId2)-1];
+         $myItem=json_decode($curl->curlGet("/org.acme.sample.UserAsset"."/$assetId2"),true);
+         if (isset($myItem['description']))
+            echo $myItem['description'];
+         }
+///DISPLAY TRADE STATE
+         $state=$value['state'];
+         if (isset($state))
+            if ($state=='OK')
+            echo "<td class='.bg-success'>$state</td>";
+            else
+            echo "<td class='.bg-danger'>$state</td>";
+
+         echo"<form class='trade' method='POST' action='process.php'>
+         <input type='text' name='action'     value='echanger'  hidden>
+         <input type='text' name='assetId1'   value='$asset1'  hidden>";
+         if (isset($asset2) )
+            echo"<input type='text' name='assetId2'   value='$asset2'  hidden>";
+         echo"<input type='text' name='requestId'  value='$id'  hidden>
+         <input type='text' name='assetId1'   value='$state'  hidden>";
+         if ($state!='OK')
+            echo"<input type='submit'  class='btn btn-info' name='trade' value='Echanger' />";
+         echo"</form>";
+         echo "</table>";
+
+
+      /*
+{
+  "$class": "org.acme.sample.SubmitRequest",
+  "asset": "string",
+  "newstate": "string",
+  "transactionId": "string",
+  "timestamp": "2017-10-19T18:33:35.542Z"
+}
+
+      */
+
+}
+}
+
+}
+
+/*
 function DisplayJSONList($json){
 
    $jsonarray = json_decode($json, true); 
@@ -89,5 +171,5 @@ function DisplayJSONList($json){
    
    echo "</table>";
 }
-
+*/
 ?>
