@@ -17,11 +17,8 @@ echo "
 
 include "header.php";
 
- if (!isset($_SESSION['participantId'])){
- 	include "login_form.php";
- }else{
- 	include "dashboard.php";
- }
+
+include "inscription_form.php";
 
 
 

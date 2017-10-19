@@ -31,5 +31,39 @@ if(!empty($_GET['action'])){
 }	
 
 
+if(!empty($_POST['inscription'])){
+   $id = $_POST['participantId'];
+   $password = $_POST['password'];
+   $first_name = $_POST['first_name'];
+   $last_name = $_POST['last_name'];
+    $data = '{
+      "$class": "org.acme.sample.SampleParticipant",
+      "participantId": "participantId:'.$id.'",
+      "password": "'.$password.'",
+      "firstName": "'.$first_name.'",
+      "lastName": "'.$last_name.'"
+    }';
+    $curl = new Curl();
+   $curl->curlPost('/org.acme.sample.SampleParticipant',$data); 
+   header('Location: connection.php');
+} 
+
+if(!empty($_POST['connexion'])){
+   $id = $_POST['participantId'];
+   $password = $_POST['password'];
+   
+    $data = '{
+      "$class": "org.acme.sample.SampleParticipant",
+      "participantId": "participantId:'.$id.'",
+      "password": "'.$password.'",
+    }';
+    $curl = new Curl();
+   $connect = $curl->curlGet('/org.acme.sample.SampleParticipant',$data); 
+   echo $connect;
+   
+   header('Location: connection.php');
+} 
+
+
 
 ?>
