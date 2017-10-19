@@ -32,8 +32,8 @@ echo"</div>";
 
 //Display My Request
 echo"<div class='col-12 panel'><label>Mes demandes</label>";
-$listeJSON = $curl->curlGet('/org.acme.sample.Request'); 
-DisplayJSONList($listeJSON);
+//$listeJSON = $curl->curlGet('/org.acme.sample.Request'); 
+DisplayTrades();
 echo"</div>";
 
 
