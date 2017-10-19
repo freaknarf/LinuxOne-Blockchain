@@ -74,5 +74,20 @@ if(!empty($_POST['connexion'])){
         </script>";
 }
 
+if(!empty($_POST['submitRequest'])){
+   $curl=new Curl(); 
+   $request_id = rand(0,9999);
+   $data = '{
+        "$class": "org.acme.sample.Request",
+        "requestId": "requestId:'.$request_id.'",
+        "asset1": "resource:org.acme.sample.UserAsset#assetId:'.$_POST['asset1'].'",
+        "asset2": "resource:org.acme.sample.UserAsset#assetId:'.$_POST['yourAsset'].'",
+        "state": "Demandé"
+      } ';
+   $curl->curlPost("/org.acme.sample.Request", $data);
+   echo "<script>
+          window.open('index.php', '_self');
+        </script>";
+}
 
 ?>

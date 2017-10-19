@@ -2,7 +2,6 @@
 
 
 $curl = new Curl();
-$_SESSION['participantId']=6666;
 echo "<div id='window' class='row'>";
 
 //form add an user asset

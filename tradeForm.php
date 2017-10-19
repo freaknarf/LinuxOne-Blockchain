@@ -36,7 +36,8 @@ echo"
 
      if($value['owner']=="resource:org.acme.sample.SampleParticipant#".$_SESSION['participantId']){
          $description=$value["description"];
-         echo "<option >$description</option>";
+         $assetid=$value["assetId"];
+         echo "<option value='".$assetid."'>$description</option>";
       }
 }
 			echo"</select>

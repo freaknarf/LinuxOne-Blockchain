@@ -11,6 +11,7 @@
 
             }else{
             		echo "<label>Connecter en tant que participant ".$_SESSION['participantId']."</label>";
+                        echo "<a href='deconnexion.php'>Se déconnecter</a>";
 
             }
             	echo "</div>";

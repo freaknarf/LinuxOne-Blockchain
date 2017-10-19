@@ -6,7 +6,7 @@ function DisplayMyItems(){
    echo'<table>';
 
    foreach ($myItems as $key => $value) {
-      if($value['owner']=="resource:org.acme.sample.SampleParticipant#".$_SESSION['participantId']){
+      if($value['owner']=="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
          $description=$value["description"];
          echo "<tr><td value=$description>$description</td></tr>";
       }
@@ -22,7 +22,7 @@ function DisplayAllItems(){
 
 
    foreach ($myItems as $key => $value) {
-      if($value['owner']!="resource:org.acme.sample.SampleParticipant#".$_SESSION['participantId']){
+      if($value['owner']!="resource:org.acme.sample.SampleParticipant#participantId".$_SESSION['participantId']){
          $description=$value["description"];
         $assetId=$value["assetId"];
          echo "<tr><td value=$description>$description</td><td><a href='tradeForm.php?assetId=$assetId'> Echanger</td></tr>";
@@ -31,6 +31,10 @@ function DisplayAllItems(){
 
    echo'</table>';
 }
+
+
+
+
 
 
 function DisplayJSONList($json){
