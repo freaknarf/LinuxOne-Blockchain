@@ -1,5 +1,4 @@
 <?php
-session_start();
 
    echo "<div id='header'> 
             <h3> TROCAPP</h3>";
@@ -7,7 +6,7 @@ session_start();
 
             if (!isset($_SESSION['participantId'])){
             		 echo "<a href='login.php' >Connection </a>";
-            		 echo "<a href='inscription.php' >Connection </a>";
+            		 echo "<a href='inscription.php' >Inscription </a>";
 
 
             }else{

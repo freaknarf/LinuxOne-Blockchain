@@ -1,8 +1,8 @@
 <?php
+session_start();
 
 include "Curl.php";
 include "functions.php";
-session_start();
 
 echo "
 <html>

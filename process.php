@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include "Curl.php";
 include "functions.php";
 
@@ -43,9 +44,10 @@ if(!empty($_POST['inscription'])){
       "firstName": "'.$first_name.'",
       "lastName": "'.$last_name.'"
     }';
-    $curl = new Curl();
+    //echo $data;
+   $curl = new Curl();
    $curl->curlPost('/org.acme.sample.SampleParticipant',$data); 
-   header('Location: connection.php');
+   //header('Location: index.php');
 } 
 
 if(!empty($_POST['connexion'])){
@@ -57,11 +59,10 @@ if(!empty($_POST['connexion'])){
       "participantId": "participantId:'.$id.'",
       "password": "'.$password.'",
     }';
-    $curl = new Curl();
+   $curl = new Curl();
    $connect = $curl->curlGet('/org.acme.sample.SampleParticipant',$data); 
-   echo $connect;
-   
-   header('Location: connection.php');
+   //echo 'connecté '.$connect; 
+   //header('Location: connection.php');
 } 
 
 
