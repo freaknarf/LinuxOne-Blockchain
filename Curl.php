@@ -58,7 +58,7 @@ public function connectionJira(){
 		global $jirauser,$jirapwd,$url,$username,$password; 
 		$username =  base64_decode($jirauser);
 		$password =  base64_decode($jirapwd);
-		$url = "http//148.100.4.195:3000/api";
+		$url = "http://148.100.4.195:3000/api";
 }
 
 // Prepare CURL GET and POST Requests
