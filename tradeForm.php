@@ -34,7 +34,7 @@ echo"
    var_dump($myItems);
       foreach ($myItems as $key => $value) {
 
-     if($value['owner']=="resource:org.acme.sample.SampleParticipant#".$_SESSION['participantId']){
+     if($value['owner']=="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
          $description=$value["description"];
          $assetid=$value["assetId"];
          echo "<option value='".$assetid."'>$description</option>";
