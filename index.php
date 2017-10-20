@@ -22,7 +22,7 @@ include "header.php";
  	include "dashboard.php";
  }
 
-die("here");
+
 
 
 echo "</body></html>";

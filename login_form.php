@@ -11,7 +11,7 @@ echo"
 			<label>ParticipantId<input type='integer' name='participantId' /></label></br>
 			<label>Mot de passe<input type='password' name='mdp' /></label>
 
-         <input type='submit' name='connexion' value='Login'/>
+         <input type='submit' name='connexion' value='Se connecter'/>
 		</form>
 	</div>
 ";
