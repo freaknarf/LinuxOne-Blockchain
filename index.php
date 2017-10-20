@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 session_start();
 
 include "Curl.php";
@@ -19,7 +16,6 @@ echo "
 ";
 
 include "header.php";
-
  if (!isset($_SESSION['participantId'])){
  	include "login_form.php";
  }else{

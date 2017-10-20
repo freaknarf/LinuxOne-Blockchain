@@ -24,7 +24,10 @@ echo"
    $curl=new Curl();  
    $myItems=json_decode($curl->curlGet("/org.acme.sample.UserAsset"),true);
    var_dump($myItems);
-     foreach ($myItems as $key => $value) {
+
+      foreach ($myItems as $key => $value) {
+
+
      if($value['owner']=="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
          $description=$value["description"];
          $assetid=$value["assetId"];

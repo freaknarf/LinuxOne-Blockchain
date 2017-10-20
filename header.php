@@ -9,8 +9,8 @@
 
             }else{
             		echo "<label>Connected as user ".$_SESSION['participantId']."</label>";
+                        echo "<a href='deconnexion.php'> - Logout</a>";
 
-                        echo "<a href=' - logout.php' >Logout </a>";
             }
             	echo "</div>";
 echo   "</div>";

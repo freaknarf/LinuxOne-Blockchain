@@ -1,5 +1,6 @@
 <?php
 session_start(); 
+
 include "Curl.php";
 include "functions.php";
 if(!empty($_POST['adduserasset'])){
@@ -9,6 +10,7 @@ if(!empty($_POST['adduserasset'])){
    $asset_id = rand(0,9999);
    $data = '{
   "$class": "org.acme.sample.UserAsset",
+
   "owner": "resource:org.acme.sample.SampleParticipant#participantId:'.$participantId.'",
   "assetId": "assetId:'.$asset_id.'",
   "value": "'.$value.'",
@@ -21,21 +23,15 @@ if(!empty($_POST['adduserasset'])){
           window.open('index.php', '_self');
         </script>";
 }
+
+
+
    var_dump($_POST);
 if(!empty($_POST['action'])){
    if($_POST['action'] == 'echanger'){
     $id = $_POST['requestId'];
        $curl = new Curl();
-       $data='{
-  "$class": "org.acme.sample.SubmitRequest",
-  "request": "resource:org.acme.sample.Request#'.$id.'",
-  "newstate": "OK"}';
-  /*echo $data;*/
- 
-    $curl->curlPost('/org.acme.sample.SubmitRequest',$data);
-   }
-}
-    
+
 if(!empty($_POST['inscription'])){
    $id = $_POST['participantId'];
    $password = $_POST['password'];
@@ -72,6 +68,8 @@ if(!empty($_POST['connexion'])){
           window.open('index.php', '_self');
         </script>";
 }
+
+
 if(!empty($_POST['submitRequest'])){
    $curl=new Curl(); 
    $request_id = rand(0,9999);
@@ -87,4 +85,5 @@ if(!empty($_POST['submitRequest'])){
           window.open('index.php', '_self');
         </script>";
 }
+
 ?>

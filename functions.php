@@ -19,15 +19,20 @@ function DisplayMyItems(){
 
 function DisplayAllItems(){
    $curl=new Curl(); 
-   $myItems=json_decode($curl->curlGet("/org.acme.sample.UserAsset"),true);;;
+   $myItems=json_decode($curl->curlGet("/org.acme.sample.UserAsset"),true);
    echo'<table>';
 
 
    foreach ($myItems as $key => $value) {
-      if($value['owner']!="resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
+
+      if($value['owner'] != "resource:org.acme.sample.SampleParticipant#participantId:".$_SESSION['participantId']){
+
          $description=$value["description"];
          $assetId=$value["assetId"];
-         echo "<tr><td class='item' value=$description>$description</td><td><a class='btn btn-info' role='button' href='tradeForm.php?assetId=$assetId'> Echanger</td></tr>";
+         echo "<tr><td class='item' value=$description>$description</td>";
+         $value=$value["value"];
+         echo "<td value=$value>$value</td>";
+         echo"<td><a class='btn btn-info' role='button' href='tradeForm.php?assetId=$assetId'> Echanger</td></tr>";
       }
    }
 
@@ -98,16 +103,6 @@ function DisplayTrades(){
          echo "</table>";
 
 
-      /*
-{
-  "$class": "org.acme.sample.SubmitRequest",
-  "asset": "string",
-  "newstate": "string",
-  "transactionId": "string",
-  "timestamp": "2017-10-19T18:33:35.542Z"
-}
-
-      */
 
 }
 }
@@ -115,6 +110,10 @@ function DisplayTrades(){
 }
 
 /*
+=======
+
+
+>>>>>>> 889a954b46d13e3ed262cc12986e1e3cedf7b769
 function DisplayJSONList($json){
 
    $jsonarray = json_decode($json, true); 
@@ -143,13 +142,26 @@ function DisplayJSONList($json){
    if(count($jsonarray)>1){
       for($i=0;$i<count($jsonarray);$i++){
          echo "<tr>";
+<<<<<<< HEAD
          $assetId1=$jsonarray[$i]['asset1'];
          $assetId2=$jsonarray[$i]['asset2'];
+=======
+         $fullassetId1=$jsonarray[$i]['asset1'];
+         $fullassetId2=$jsonarray[$i]['asset2'];
+
+         $assetId1 = preg_split('/#/',$fullassetId1);
+         $assetId2 = preg_split('/#/',$fullassetId2);
+
+>>>>>>> 889a954b46d13e3ed262cc12986e1e3cedf7b769
          $requestId=$jsonarray[$i]['requestId'];
 
 
          ///// warning big shit here
+<<<<<<< HEAD
          echo "<td><a href='process.php?action=echanger&requestId=".$requestId."&assetId1=".htmlspecialchars($assetId1)."&assetId2=".$assetId2."'>Echanger</a></td>";
+=======
+         echo "<td><a href='process.php?action=echanger&requestId=".$requestId."&assetId1=".$assetId1[1]."&assetId2=".$assetId2[1]."'>Echanger</a></td>";
+>>>>>>> 889a954b46d13e3ed262cc12986e1e3cedf7b769
          
          foreach($jsonarray[$i] as $key){
             echo "<td> $key</td>";
@@ -171,5 +183,7 @@ function DisplayJSONList($json){
    
    echo "</table>";
 }
+<<<<<<< HEAD
 */
+
 ?>
