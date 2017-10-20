@@ -24,12 +24,12 @@ DisplayMyItems();
 echo "</div>";
 
 //Display all assets
-echo "<div class='col-10 panel'><h2><label class='text-primary'>Available for trade:</label></h2>";
+echo "<div class='col-4 panel'><h2><label class='text-primary'>Available for trade:</label></h2>";
 DisplayAllItems();
 echo"</div>";
 
 //Display My Request
-echo"<div class='col-10 panel'><h2><label class='text-primary'>My requests:</label></h2>";
+echo"<div class='col-6 panel'><h2><label class='text-primary'>My requests:</label></h2>";
 DisplayTrades();
 echo"</div>";
 

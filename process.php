@@ -1,6 +1,7 @@
 <?php
 session_start(); 
 
+
 include "Curl.php";
 include "functions.php";
 if(!empty($_POST['adduserasset'])){
@@ -24,13 +25,18 @@ if(!empty($_POST['adduserasset'])){
         </script>";
 }
 
-
-
-   var_dump($_POST);
 if(!empty($_POST['action'])){
    if($_POST['action'] == 'echanger'){
     $id = $_POST['requestId'];
        $curl = new Curl();
+
+       $data='{
+  "$class": "org.acme.sample.SubmitRequest",
+  "request": "resource:org.acme.sample.Request#'.$id.'",
+  "newstate": "OK"}';
+    $curl->curlPost('/org.acme.sample.SubmitRequest',$data);
+   }
+}
 
 if(!empty($_POST['inscription'])){
    $id = $_POST['participantId'];
@@ -68,7 +74,6 @@ if(!empty($_POST['connexion'])){
           window.open('index.php', '_self');
         </script>";
 }
-
 
 if(!empty($_POST['submitRequest'])){
    $curl=new Curl(); 
